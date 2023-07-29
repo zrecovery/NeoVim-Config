@@ -42,6 +42,6 @@ nvim
 
 本项目采用MIT许可证 - 具体内容详见文件[LICENSE.md](LICENSE.md).
 ## 致谢
-本项目[lua/keyword.lua](lua/keyword.lua)文件源自[glepnir](https://github.com/glepnir)。本项目根据MIT许可证使用源码，感谢其开源分享。
+本项目[lua/keymap.lua](lua/keymap.lua)文件源自[glepnir](https://github.com/glepnir)。本项目根据MIT许可证使用源码，感谢其开源分享。
 
 
