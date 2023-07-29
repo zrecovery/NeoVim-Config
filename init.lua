@@ -11,8 +11,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 -- 显示相对行号
-vim.opt.number =true
-vim.opt.relativenumber =true
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 
 -- 快捷键
@@ -20,7 +20,8 @@ vim.g.mapleader = ' '
 nmap({ ' ', '', opts(noremap) })
 xmap({ ' ', '', opts(noremap) })
 -- LSP快捷键
-nmap({ '<Leader>f', function()
+-- 格式化
+nmap({ '<Leader>lf', function()
     vim.lsp.buf.format { async = true }
 end, opts(noremap, silent) })
 -- Neotree配置
@@ -55,9 +56,6 @@ function conf.lspcmp()
             end,
         },
         mapping = cmp.mapping.preset.insert({
-            ['<C-u>'] = cmp.mapping.scroll_docs(-4), -- Up
-            ['<C-d>'] = cmp.mapping.scroll_docs(4),  -- Down
-            -- C-b (back) C-f (forward) for snippet placeholder navigation.
             ['<C-Space>'] = cmp.mapping.complete(),
             ['<CR>'] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
