@@ -76,13 +76,17 @@ function conf.lspcmp()
     sources = {
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
+      { name = 'nvim_lsp_document_symbol' },
+      { name = 'nvim_lsp_signature_help' },
+      { name = 'nvim_lsp_document_symbol' },
+      { name = 'buffer' },
     },
   })
 end
 
 function conf.treesitter()
   require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'python', 'typescript', 'javascript', 'tsx', 'jsx', 'css', 'json', 'lua' },
+    ensure_installed = { 'python', 'typescript', 'javascript', 'tsx', 'css', 'json', 'lua' },
     sync_install = false,
     auto_install = true,
     ignore_install = {},
@@ -108,6 +112,11 @@ function conf.lint()
       lint.try_lint()
     end,
   })
+end
+
+-- 自动匹配括号之类的
+function conf.pairs()
+  require('autoclose').setup()
 end
 
 return conf

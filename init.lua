@@ -37,6 +37,10 @@ packer.startup(function(use)
       'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
       'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
       'L3MON4D3/LuaSnip',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
     },
     config = conf.lspcmp,
   })
@@ -51,6 +55,7 @@ packer.startup(function(use)
     },
   })
   use({ 'mfussenegger/nvim-lint', config = conf.lint })
+  use({ 'm4xshen/autoclose.nvim', config = conf.pairs })
 end)
 
 -- LSP快捷键
@@ -118,6 +123,5 @@ nmap({
     vim.lsp.buf.rename()
   end,
 })
-
 -- Neotree配置
 nmap({ '<Leader>e', cmd('Neotree toggle'), opts(noremap, silent) })
