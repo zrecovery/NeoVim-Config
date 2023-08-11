@@ -1,4 +1,4 @@
-conf = {}
+local conf = {}
 -- 补全配置
 function conf.lspcmp()
   -- Add additional capabilities supported by nvim-cmp
@@ -117,6 +117,11 @@ end
 -- 自动匹配括号之类的
 function conf.pairs()
   require('autoclose').setup()
+end
+
+-- 缓冲栏
+function conf.bufferline()
+  require('bufferline').setup({})
 end
 
 return conf

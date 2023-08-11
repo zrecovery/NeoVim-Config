@@ -18,6 +18,9 @@ vim.opt.relativenumber = true
 -- 快捷键
 vim.g.mapleader = ' '
 
+-- 真彩色
+vim.opt.termguicolors = true
+
 nmap({ ' ', '', opts(noremap) })
 xmap({ ' ', '', opts(noremap) })
 
@@ -50,12 +53,16 @@ packer.startup(function(use)
     branch = 'v3.x',
     requires = {
       'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'nvim-tree/nvim-web-devicons', 
       'MunifTanjim/nui.nvim',
     },
   })
+  -- Lint样式检查
   use({ 'mfussenegger/nvim-lint', config = conf.lint })
+  -- 匹配括号
   use({ 'm4xshen/autoclose.nvim', config = conf.pairs })
+  -- 缓冲栏
+  use({ 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons', config = conf.bufferline })
 end)
 
 -- LSP快捷键
