@@ -25,19 +25,30 @@ nmap({ ' ', '', opts(noremap) })
 xmap({ ' ', '', opts(noremap) })
 
 -- 包管理
-local packer = require('packer')
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+local lazy = require("lazy")
 
-packer.startup(function(use)
-    -- 管理包
-    use('wbthomason/packer.nvim')
+lazy.setup({
     --高亮显示
-    use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = conf.treesitter })
+    { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = conf.treesitter },
     -- LSP及补全
-    use({ 'neovim/nvim-lspconfig' })
-    use({
+    { 'neovim/nvim-lspconfig' },
+    {
         'hrsh7th/nvim-cmp',
+        event = "InsertEnter",
         requires = {
-            'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
+            'hrsh7th/cmp-nvim-lsp',     -- LSP source for nvim-cmp
             'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
             'L3MON4D3/LuaSnip',
             'hrsh7th/cmp-cmdline',
@@ -46,31 +57,33 @@ packer.startup(function(use)
             'hrsh7th/cmp-nvim-lsp-document-symbol',
         },
         config = conf.lspcmp,
-    })
+    },
     -- Neotree 显示文件树
-    use({
+    {
         'nvim-neo-tree/neo-tree.nvim',
         branch = 'v3.x',
-        requires = {
+        dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-tree/nvim-web-devicons',
             'MunifTanjim/nui.nvim',
         },
-    })
+    },
     -- Lint样式检查
-    use({ 'mfussenegger/nvim-lint', config = conf.lint })
+    { 'mfussenegger/nvim-lint',  config = conf.lint },
     -- 匹配括号
-    use({ 'm4xshen/autoclose.nvim', config = conf.pairs })
+    { 'm4xshen/autoclose.nvim',  config = conf.pairs },
     -- 缓冲栏
-    use({ 'akinsho/bufferline.nvim', tag = '*', requires = 'nvim-tree/nvim-web-devicons', config = conf.bufferline })
+    { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons', config = conf.bufferline },
     --配色
-    use({
+    {
         "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
         config = function()
             vim.cmd [[colorscheme tokyonight]]
         end
-    })
-end)
+    }
+})
 
 -- LSP快捷键
 -- 对付过长提示
