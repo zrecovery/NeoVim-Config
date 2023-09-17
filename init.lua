@@ -25,130 +25,130 @@ nmap({ ' ', '', opts(noremap) })
 xmap({ ' ', '', opts(noremap) })
 
 -- 包管理
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system({
-        "git",
-        "clone",
-        "--filter=blob:none",
-        "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
-        lazypath,
-    })
+  vim.fn.system({
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
-local lazy = require("lazy")
+local lazy = require('lazy')
 
 lazy.setup({
-    --高亮显示
-    { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = conf.treesitter },
-    -- LSP及补全
-    { 'neovim/nvim-lspconfig' },
-    {
-        'hrsh7th/nvim-cmp',
-        event = "InsertEnter",
-        requires = {
-            'hrsh7th/cmp-nvim-lsp',     -- LSP source for nvim-cmp
-            'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
-            'L3MON4D3/LuaSnip',
-            'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
-            'hrsh7th/cmp-nvim-lsp-document-symbol',
-        },
-        config = conf.lspcmp,
+  --高亮显示
+  { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', config = conf.treesitter },
+  -- LSP及补全
+  { 'neovim/nvim-lspconfig' },
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
+      'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
+      'L3MON4D3/LuaSnip',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
     },
-    -- Neotree 显示文件树
-    {
-        'nvim-neo-tree/neo-tree.nvim',
-        branch = 'v3.x',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'nvim-tree/nvim-web-devicons',
-            'MunifTanjim/nui.nvim',
-        },
+    config = conf.lspcmp,
+  },
+  -- Neotree 显示文件树
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
     },
-    -- Lint样式检查
-    { 'mfussenegger/nvim-lint',  config = conf.lint },
-    -- 匹配括号
-    { 'm4xshen/autoclose.nvim',  config = conf.pairs },
-    -- 缓冲栏
-    { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons', config = conf.bufferline },
-    --配色
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            vim.cmd [[colorscheme tokyonight]]
-        end
-    }
+  },
+  -- Lint样式检查
+  { 'mfussenegger/nvim-lint', config = conf.lint },
+  -- 匹配括号
+  { 'm4xshen/autoclose.nvim', config = conf.pairs },
+  -- 缓冲栏
+  { 'akinsho/bufferline.nvim', dependencies = 'nvim-tree/nvim-web-devicons', config = conf.bufferline },
+  --配色
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
 })
 
 -- LSP快捷键
 -- 对付过长提示
 nmap({
-    '<Leader>ll',
-    function()
-        vim.diagnostic.open_float(0, { scope = 'line' })
-    end,
-    opts(noremap, silent),
+  '<Leader>ll',
+  function()
+    vim.diagnostic.open_float(0, { scope = 'line' })
+  end,
+  opts(noremap, silent),
 })
 
 -- 代码行为
 nmap({
-    '<Leader>la',
-    function()
-        vim.lsp.buf.code_action({ async = true })
-    end,
-    opts(noremap, silent),
+  '<Leader>la',
+  function()
+    vim.lsp.buf.code_action({ async = true })
+  end,
+  opts(noremap, silent),
 })
 -- 格式化
 nmap({
-    '<Leader>lf',
-    function()
-        vim.lsp.buf.format({ async = true })
-    end,
-    opts(noremap, silent),
+  '<Leader>lf',
+  function()
+    vim.lsp.buf.format({ async = true })
+  end,
+  opts(noremap, silent),
 })
 -- 查看定义
 nmap({
-    '<Leader>ld',
-    function()
-        vim.lsp.buf.definition({ async = true })
-    end,
-    opts(noremap, silent),
+  '<Leader>ld',
+  function()
+    vim.lsp.buf.definition({ async = true })
+  end,
+  opts(noremap, silent),
 })
 -- 显示提示
 nmap({
-    '<Leader>lh',
-    function()
-        vim.lsp.buf.hover({ async = true })
-    end,
-    opts(noremap, silent),
+  '<Leader>lh',
+  function()
+    vim.lsp.buf.hover({ async = true })
+  end,
+  opts(noremap, silent),
 })
 -- 查看实现
 nmap({
-    '<Leader>li',
-    function()
-        vim.lsp.buf.implementation({ async = true })
-    end,
-    opts(noremap, silent),
+  '<Leader>li',
+  function()
+    vim.lsp.buf.implementation({ async = true })
+  end,
+  opts(noremap, silent),
 })
 -- 查看引用
 nmap({
-    '<Leader>lr',
-    function()
-        vim.lsp.buf.references({ async = true })
-    end,
-    opts(noremap, silent),
+  '<Leader>lr',
+  function()
+    vim.lsp.buf.references({ async = true })
+  end,
+  opts(noremap, silent),
 })
 -- 重命名
 nmap({
-    '<Leader>rn',
-    function()
-        vim.lsp.buf.rename()
-    end,
+  '<Leader>rn',
+  function()
+    vim.lsp.buf.rename()
+  end,
 })
 -- Neotree配置
 nmap({ '<Leader>e', cmd('Neotree toggle'), opts(noremap, silent) })
