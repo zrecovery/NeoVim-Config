@@ -10,12 +10,6 @@
 
 - 安装NeoVim
 
-- 本项目采用Packer作为包管理，首次使用前执行以下命令
-
-```
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-```
 - 本项目默认开启Lua, Python, Javascript/Typescript/JSX/TSX, CSS语言服务支持。
 相关语言服务可通过系统包管理安装
 ```
@@ -25,13 +19,13 @@ pacman -S lua-language-server pyright typescript-language-server
 其他语言服务及安装方式可以官方网站查找：https://langserver.org/
 
 ### 安装
-在确保Packer安装后，在Shell中输入以下命令进入NeoVim: 
+在Shell中输入以下命令进入NeoVim: 
 ```
 nvim
 ```
 进入NeoVim后，在正常模式执行以下命令，安装插件: 
 ```
-:PackerInstall
+:Lazy sync
 :TSInstall
 ```
 
