@@ -112,3 +112,4 @@ tags
 
 # NeoVim Config Cache 
 plugin/**/*
+lazy-lock.json 
