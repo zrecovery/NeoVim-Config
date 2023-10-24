@@ -73,6 +73,14 @@ function conf.lspcmp()
         end
       end, { 'i', 's' }),
     }),
+        formatting = {
+        format = require('lspkind').cmp_format({
+            mode = "symbol",
+            maxwidth = 50,
+            ellipsis_char = '...',
+            symbol_map = { Codeium = "", }
+        })
+    },
     sources = {
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
@@ -80,6 +88,7 @@ function conf.lspcmp()
       { name = 'nvim_lsp_signature_help' },
       { name = 'nvim_lsp_document_symbol' },
       { name = 'buffer' },
+      { name = 'codeium' },
     },
   })
 end

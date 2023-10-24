@@ -2,7 +2,6 @@ local keymap = require('keymap')
 local nmap, xmap = keymap.nmap, keymap.xmap
 local noremap = keymap.noremap
 local opts = keymap.new_opts
-
 local cmd = keymap.cmd
 local conf = require('config')
 --基础配置
@@ -49,7 +48,7 @@ lazy.setup({
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
-      'saadparwaiz1/cmp_luasnip', -- Snippets source for nvim-cmp
+      'saadparwaiz1/cmp_luasnip',
       'L3MON4D3/LuaSnip',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-buffer',
@@ -90,11 +89,14 @@ lazy.setup({
   },
   {
     'Exafunction/codeium.vim',
+    dependencies = {
+      'onsails/lspkind.nvim'
+    },
     event = 'BufEnter',
     vim.keymap.set('i', '<C-i>', function()
       return vim.fn['codeium#Accept']()
     end, { expr = true }),
-  },
+  }
 })
 
 require('shortcut')
