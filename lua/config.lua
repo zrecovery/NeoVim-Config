@@ -7,7 +7,7 @@ function conf.lspcmp()
   local lspconfig = require('lspconfig')
 
   -- Enable some language servers with the additional completion capabilities offered by nvim-cmp
-  local servers = { 'pyright', 'tsserver', 'jsonls', 'cssls', 'html'}
+  local servers = { 'pyright', 'tsserver', 'jsonls', 'cssls', 'html', 'yamlls' }
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
       capabilities = capabilities,
@@ -73,13 +73,13 @@ function conf.lspcmp()
         end
       end, { 'i', 's' }),
     }),
-        formatting = {
-        format = require('lspkind').cmp_format({
-            mode = "symbol",
-            maxwidth = 50,
-            ellipsis_char = '...',
-            symbol_map = { Codeium = "", }
-        })
+    formatting = {
+      format = require('lspkind').cmp_format({
+        mode = 'symbol',
+        maxwidth = 50,
+        ellipsis_char = '...',
+        symbol_map = { Codeium = '' },
+      }),
     },
     sources = {
       { name = 'nvim_lsp' },
