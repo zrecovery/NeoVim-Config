@@ -97,6 +97,7 @@ lazy.setup({
       return vim.fn['codeium#Accept']()
     end, { expr = true }),
   },
+    {'akinsho/toggleterm.nvim', version = "*", config = true}
 })
 
 require('shortcut')

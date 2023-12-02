@@ -1,5 +1,5 @@
 local keymap = require('keymap')
-local nmap = keymap.nmap
+local nmap, tmap = keymap.nmap, keymap.tmap
 local silent, noremap = keymap.silent, keymap.noremap
 local opts = keymap.new_opts
 
@@ -75,3 +75,6 @@ nmap({ '<Leader>e', cmd('Neotree toggle'), opts(noremap, silent) })
 -- Telescope配置
 nmap({ '<Leader>ff', cmd('Telescope find_files'), opts(noremap) })
 nmap({ '<Leader>fg', cmd('Telescope live_grep'), opts(noremap) })
+-- Terminal配置
+nmap({ '<Leader>t', cmd('ToggleTerm'), opts(noremap) })
+tmap({ '<Esc>', [[<C-\><C-n>]], opts(noremap) })
