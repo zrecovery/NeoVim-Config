@@ -7,7 +7,6 @@ local plugins = {
     { 'neovim/nvim-lspconfig' },
     {
         'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
         dependencies = {
             'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
             'saadparwaiz1/cmp_luasnip',
@@ -43,14 +42,14 @@ local plugins = {
         dependencies = { 'nvim-lua/plenary.nvim' },
     },
     {
-        'Exafunction/codeium.vim',
+        'Exafunction/codeium.nvim',
         dependencies = {
-            'onsails/lspkind.nvim',
+            "nvim-lua/plenary.nvim",
+            "hrsh7th/nvim-cmp",
         },
-        event = 'BufEnter',
-        vim.keymap.set('i', '<C-i>', function()
-            return vim.fn['codeium#Accept']()
-        end, { expr = true }),
+        config = function()
+            require("codeium").setup({})
+        end
     },
     { 'akinsho/toggleterm.nvim', version = "*", config = true }
 }
