@@ -10,11 +10,10 @@
 
 - 安装NeoVim
 
-- 本项目默认开启Lua, Python, Javascript/Typescript/JSX/TSX, CSS语言服务支持。
-相关语言服务可通过系统包管理安装
+- 本项目默认开启Bash, Lua, Python, Javascript/Typescript/JSX/TSX, Unocss, Yaml, Prisma, HTML, CSS语言服务支持。
+相关语言服务可通过Bun包管理安装
 ```
-# Arch Linux为例
-pacman -S lua-language-server pyright typescript-language-server
+bun add -g pyright bash-language-server typescript typescript-language-server unocss-language-server @prisma/language-server yaml-language-server vscode-langservers-extracted
 ```
 其他语言服务及安装方式可以官方网站查找：https://langserver.org/
 
@@ -26,7 +25,7 @@ nvim
 进入NeoVim后，在正常模式执行以下命令，安装插件: 
 ```
 :Lazy sync
-:TSInstall
+:TSInstall all
 ```
 
 确保插件安装后即可完成全部安装.
@@ -35,7 +34,7 @@ nvim
 ## 许可证
 
 本项目采用MIT许可证 - 具体内容详见文件[LICENSE.md](LICENSE.md).
+
 ## 致谢
 本项目[lua/keymap.lua](lua/keymap.lua)文件源自[glepnir](https://github.com/glepnir)。本项目根据MIT许可证使用源码，感谢其开源分享。
-
 
