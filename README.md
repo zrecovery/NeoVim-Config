@@ -10,12 +10,8 @@
 
 - 安装NeoVim
 
-- 本项目默认开启Lua, Python, Javascript/Typescript/JSX/TSX, CSS语言服务支持。
-相关语言服务可通过系统包管理安装
-```
-# Arch Linux为例
-pacman -S lua-language-server pyright typescript-language-server
-```
+- 本项目默认开启Lua, Python, Javascript/Typescript/JSX/TSX , UNOCSS支持。
+相关语言服务可通过包管理安装
 其他语言服务及安装方式可以官方网站查找：https://langserver.org/
 
 ### 安装
@@ -35,6 +31,7 @@ nvim
 ## 许可证
 
 本项目采用MIT许可证 - 具体内容详见文件[LICENSE.md](LICENSE.md).
+
 ## 致谢
 本项目[lua/keymap.lua](lua/keymap.lua)文件源自[glepnir](https://github.com/glepnir)。本项目根据MIT许可证使用源码，感谢其开源分享。
 
