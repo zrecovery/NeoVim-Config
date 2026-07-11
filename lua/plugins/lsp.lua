@@ -1,15 +1,22 @@
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
-local lspconfig = require('lspconfig')
-local servers = { "pyright", "ts_ls", "unocss", "postgres_lsp", "jsonls", "html", "marksman",
-    "docker_compose_language_service", "yamlls", "biome", "bashls" }
 
+
+local servers = {
+    "pyright",
+    "ts_ls",
+    "unocss",
+    "jsonls",
+    "html",
+    "marksman",
+    "biome"
+}
+
+-- 为每个服务器创建一个空配置（继承全局默认）
 for _, server in ipairs(servers) do
-    lspconfig[server].setup {
-        capabilities = capabilities
+    vim.lsp.config[server] = {
+        capabilities = capabilities,
     }
 end
 
-
-return {
-
-}
+vim.lsp.enable(servers)
+return {}
